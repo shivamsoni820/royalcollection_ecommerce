@@ -27,28 +27,23 @@ export default function ProductCard({ product }) {
 
       <div className="group w-full min-w-0 bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-5 flex flex-col hover:shadow-xl transition-all duration-300">
 
-        {/* Brand and Arrow */}
+        {/* Brand */}
 
         <div className="flex items-center justify-between">
 
           <p className="text-[10px] sm:text-xs tracking-widest uppercase text-gray-500">
-
             {product.brand}
-
           </p>
 
           <button
             onClick={() => setShowDetails(true)}
-            aria-label={`View ${product.name} details`}
+            aria-label="View product details"
             className="hover:text-gold transition-all"
           >
-
             <LuArrowUpRight size={20} />
-
           </button>
 
         </div>
-
 
         {/* Product Image */}
 
@@ -65,7 +60,6 @@ export default function ProductCard({ product }) {
 
         </button>
 
-
         {/* Rating */}
 
         <div className="flex items-center gap-2">
@@ -76,13 +70,10 @@ export default function ProductCard({ product }) {
           />
 
           <span className="text-xs sm:text-sm text-gray-500">
-
             {product.rating}
-
           </span>
 
         </div>
-
 
         {/* Product Name */}
 
@@ -92,27 +83,22 @@ export default function ProductCard({ product }) {
             onClick={() => setShowDetails(true)}
             className="text-left line-clamp-2 hover:text-gray-500"
           >
-
             {product.name}
-
           </button>
 
         </h2>
 
-
-        {/* Price and Cart */}
+        {/* Price and Cart Button */}
 
         <div className="flex items-center justify-between gap-1 mt-auto pt-4">
 
           <h3 className="text-sm sm:text-xl font-bold">
-
             ₹{product.price.toLocaleString("en-IN")}
-
           </h3>
 
           <button
             onClick={() => addToCart(product)}
-            aria-label={`Add ${product.name} to cart`}
+            aria-label="Add to cart"
             className={`w-[34px] h-[34px] sm:w-[44px] sm:h-[44px] shrink-0 rounded-full flex items-center justify-center transition-all ${
               isAdded
                 ? "bg-gold text-black"
@@ -120,10 +106,11 @@ export default function ProductCard({ product }) {
             }`}
           >
 
-            {isAdded
-              ? <LuCheck size={18} />
-              : <LuShoppingBag size={18} />
-            }
+            {isAdded ? (
+              <LuCheck size={18} />
+            ) : (
+              <LuShoppingBag size={18} />
+            )}
 
           </button>
 
@@ -131,19 +118,17 @@ export default function ProductCard({ product }) {
 
       </div>
 
-
       {/* Product Details Popup */}
 
-      {showDetails && createPortal(
-
-        <ProductDetails
-          product={product}
-          onClose={() => setShowDetails(false)}
-        />,
-
-        document.body
-
-      )}
+      {showDetails &&
+        createPortal(
+          <ProductDetails
+            product={product}
+            onClose={() => setShowDetails(false)}
+          />,
+          document.body
+        )
+      }
 
     </>
   );
